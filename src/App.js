@@ -3,9 +3,6 @@ import axios from "axios";
 import { useState } from "react";
 import { AxiosTest } from "./axiosTest";
 
-//Sheet ID
-//1UcQX8QajTGcpsiCqGLf0zFLW2Fx3paCm7qAC-HfCJEM
-
 export default function App() {
   const [input, setInput] = useState();
   const [info, setInfo] = useState([]);
@@ -19,22 +16,10 @@ export default function App() {
 
   const drugs = { name: "", ndc: "" };
 
-  const handleClick = () => {
-    // setMyObject({ drugName: "pizza" });
-    setMedication([...medication, drugs]);
-    // console.log(medication);  for now
-    // axios({
-    //   method: "get",
-    //   url: `https://api.fda.gov/drug/ndc.json?search=product_ndc:"${input}"`
-    // }).then((response) => {
-    //   console.log(response.data.results[0]);
-    // });
-  };
-
   const getData = () => {
     axios({
       method: "get",
-      url: "https://sheetdb.io/api/v1/9319nfe371c4n"
+      url: "https://sheetdb.io/api/v1/9319nfe371c4n",
     }).then((response) => {
       const mydata = response.data;
       // console.log(mydata);
@@ -48,7 +33,7 @@ export default function App() {
 
         axios({
           method: "get",
-          url: `https://api.fda.gov/drug/ndc.json?search=product_ndc:"${NewString}"`
+          url: `https://api.fda.gov/drug/ndc.json?search=product_ndc:"${NewString}"`,
         })
           .then((response) => {
             // We need to grab brand_name instead of generic_name.
@@ -76,7 +61,7 @@ export default function App() {
             setMedication([...medication, drugs]);
             setShopCart((shopCart) => ({
               ...shopCart,
-              ...updatedValue
+              ...updatedValue,
             }));
             // console.log(shopCart);
 
@@ -89,7 +74,7 @@ export default function App() {
                   "/"
                 )[0] +
                 " " +
-                response.data.results[0].dosage_form
+                response.data.results[0].dosage_form,
             ]);
 
             console.log("this is data " + response.data.results[0]);
@@ -105,14 +90,12 @@ export default function App() {
 
   return (
     <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
       <input
         onChange={(e) => {
           setInput(e.target.value);
         }}
       ></input>
-      <button onClick={handleClick}>Submit</button>
+      <button onClick={""}>Submit</button>
       <button onClick={getData}>Submit</button>
 
       {info.map((item, index) => {
