@@ -4,8 +4,9 @@ import data from "./data.json";
 
 export function AxiosTest() {
   const [myData, setMyData] = useState();
-  const [ndc, setNDC] = useState();
   const [final, setFinal] = useState([]);
+  const [hide, setHide] = useState("");
+  const [ndc, setNDC] = useState();
   const myarr = [];
   let resultString = "";
 
@@ -36,9 +37,11 @@ export function AxiosTest() {
   //   `https://api.fda.gov/drug/ndc.json?search=product_ndc:${newstring}&limit=100`
   // );
   const moreData = () => {
+    setHide("hide");
+
     axios({
       method: "get",
-      url: `https://api.fda.gov/drug/ndc.json?search=product_ndc:${newstring}&limit=100`
+      url: `https://api.fda.gov/drug/ndc.json?search=product_ndc:${newstring}&limit=100`,
     }).then((response) => {
       Object.values(
         response.data.results.map((item, index) => {
@@ -51,14 +54,18 @@ export function AxiosTest() {
   };
   return (
     <div className="parent">
-      <button onClick={moreData}>Submit</button>
+      <button className={hide} onClick={moreData}>
+        Submit
+      </button>
 
       <div className="parent">
         {final.map((item, index) => {
           return (
             <div className="child">
-              <p>{item.brand_name ? item.brand_name : item.generic_name}</p>
-              <p>{item.product_ndc}</p>
+              <p className="top">
+                {item.brand_name ? item.brand_name : item.generic_name}
+              </p>
+              <p className="bottom">{item.product_ndc}</p>
             </div>
           );
         })}

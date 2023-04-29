@@ -16,6 +16,8 @@ export default function App() {
 
   const drugs = { name: "", ndc: "" };
 
+  const [hide, setHide] = useState("");
+
   const getData = () => {
     axios({
       method: "get",
@@ -90,22 +92,24 @@ export default function App() {
 
   return (
     <div className="App">
-      <input
-        onChange={(e) => {
-          setInput(e.target.value);
-        }}
-      ></input>
-      <button onClick={""}>Submit</button>
-      <button onClick={getData}>Submit</button>
+      <div className="hide">
+        <input
+          onChange={(e) => {
+            setInput(e.target.value);
+          }}
+        ></input>
+        <button onClick={""}>Submit</button>
+        <button onClick={getData}>Submit</button>
 
-      {info.map((item, index) => {
-        return (
-          <>
-            <h1>{item}</h1>
-          </>
-        );
-      })}
-      <p>{Object.values(myObject)}</p>
+        {info.map((item, index) => {
+          return (
+            <>
+              <h1>{item}</h1>
+            </>
+          );
+        })}
+        <p>{Object.values(myObject)}</p>
+      </div>
       <AxiosTest />
       {console.log(arr + "now")}
     </div>
