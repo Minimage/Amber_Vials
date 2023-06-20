@@ -79,7 +79,7 @@ export default function App() {
                 response.data.results[0].dosage_form,
             ]);
 
-            console.log("this is data " + response.data.results[0]);
+            console.log("this is data1 " + response.data.results[0]);
           })
           .catch(function (error) {});
 
@@ -92,7 +92,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <div className="hide">
+      <div className="show">
         <input
           onChange={(e) => {
             setInput(e.target.value);
